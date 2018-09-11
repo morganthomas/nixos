@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, options, ... }:
 
 {
   imports =
@@ -98,4 +98,6 @@
     host    all             all             127.0.0.1/32            trust
     host    all             all             ::1/128                 trust
     '';
+
+  networking.timeServers = options.networking.timeServers.default;
 }
