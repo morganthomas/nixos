@@ -99,5 +99,13 @@
     host    all             all             ::1/128                 trust
     '';
 
+  fileSystems = {
+    "/home/morgan/mnt/kassir" = {
+      device = "/dev/disk/by-label/kassir";
+      fsType = "ext4";
+      options = [ "noauto" "x-systemd.automount" ];
+    };
+  };
+
   networking.timeServers = options.networking.timeServers.default;
 }
