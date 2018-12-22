@@ -105,6 +105,11 @@
       fsType = "ext4";
       options = [ "noauto" "x-systemd.automount" ];
     };
+    "/home/morgan/mnt/kassir-outer" = {
+      device = "/dev/disk/by-label/SECURE_KEY_";
+      fsType = "vfat";
+      options = [ "noauto" "x-systemd.automount" ];
+    };
   };
 
   networking.timeServers = options.networking.timeServers.default;
