@@ -103,7 +103,7 @@
     "/home/morgan/mnt/kassir" = {
       device = "/dev/disk/by-label/kassir";
       fsType = "ext4";
-      options = [ "noauto" "x-systemd.automount" ];
+      options = [ "noauto" ];
     };
     "/home/morgan/mnt/kassir-outer" = {
       device = "/dev/disk/by-label/SECURE_KEY_";
