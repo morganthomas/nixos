@@ -32,7 +32,7 @@
     wget google-chrome git keepassxc tmate python wdiff psmisc zip nix-prefetch-git vim
     (import /etc/nixos/emacs.nix { inherit pkgs; }) postgresql texlive.combined.scheme-basic
     haskellPackages.ghc haskellPackages.cabal-install haskellPackages.stack gnumake gcc binutils-unwrapped
-    nodejs-9_x gnupg
+    nodejs-9_x gnupg dos2unix nix-serve
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -40,6 +40,8 @@
   # programs.bash.enableCompletion = true;
   # programs.mtr.enable = true;
   # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
+
+  programs.ssh.startAgent = true;
 
   # List services that you want to enable:
 
@@ -71,6 +73,8 @@
   # Enable touchpad support.
   # services.xserver.libinput.enable = true;
 
+  services.locate.enable = true;
+
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
   # services.xserver.desktopManager.plasma5.enable = true;
@@ -101,7 +105,7 @@
 
   fileSystems = {
     "/home/morgan/mnt/kassir" = {
-      device = "/dev/disk/by-label/kassir";
+      device = "/dev/disk/by-label/kassir-2";
       fsType = "ext4";
       options = [ "noauto" ];
     };
@@ -113,4 +117,6 @@
   };
 
   networking.timeServers = options.networking.timeServers.default;
+
+  nix.trustedBinaryCaches = [ "https://cache.kassir.io/" ];
 }
