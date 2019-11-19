@@ -14,7 +14,15 @@
   nixpkgs.config.allowUnfree = true;
 
   # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.extraHosts = let
+    c = import /home/morgan/kassir/infrastructure/src/common.nix;
+    u = import /home/morgan/kassir/infrastructure/src/users.nix;
+  in pkgs.lib.lists.foldl' (a: b: a + b) "" (
+    pkgs.lib.attrsets.mapAttrsToList (n: v: "${v} ${n}\n") (
+      pkgs.lib.attrsets.mapAttrs (_: v: "${c.internalNetwork}.${builtins.toString v.networkId}") u
+    )
+  );
 
   # Select internationalisation properties.
   # i18n = {
@@ -32,7 +40,7 @@
     wget google-chrome git keepassxc tmate python wdiff psmisc zip nix-prefetch-git vim
     (import /etc/nixos/emacs.nix { inherit pkgs; }) postgresql texlive.combined.scheme-basic
     haskellPackages.ghc haskellPackages.cabal-install haskellPackages.stack gnumake gcc binutils-unwrapped
-    nodejs-9_x gnupg dos2unix nix-serve
+    nodejs-9_x gnupg dos2unix nix-serve easyrsa openvpn
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -102,6 +110,28 @@
     host    all             all             127.0.0.1/32            trust
     host    all             all             ::1/128                 trust
     '';
+
+  services.openvpn.servers.kassir = {
+    autoStart = false;
+    config = ''
+      client
+      dev tun
+      proto tcp
+      remote vpn.kassir.io 1194
+      resolv-retry infinite
+      nobind
+      persist-key
+      persist-tun
+      ca /home/morgan/mnt/kassir-outer/vpn/ca.crt
+      cert /home/morgan/mnt/kassir-outer/vpn/morgan.crt
+      key /home/morgan/mnt/kassir-outer/vpn/morgan.key
+      remote-cert-tls server
+      tls-auth /home/morgan/mnt/kassir-outer/vpn/ta.key 1
+      cipher AES-256-CBC
+      verb 6
+      pull
+    '';
+  };
 
   fileSystems = {
     "/home/morgan/mnt/kassir" = {
