@@ -30,9 +30,9 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget google-chrome git tmate python wdiff psmisc zip nix-prefetch-git vim
-    (import /etc/nixos/emacs.nix { inherit pkgs; }) postgresql texlive.combined.scheme-basic
+    (import /etc/nixos/emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
     haskellPackages.ghc haskellPackages.cabal-install haskellPackages.stack gnumake gcc binutils-unwrapped
-    nodejs-9_x gnupg dos2unix nix-serve easyrsa openvpn
+    nodejs-9_x gnupg dos2unix nix-serve
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
