@@ -15,14 +15,6 @@
 
   # networking.hostName = "nixos"; # Define your hostname.
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.extraHosts = let
-    c = import /home/morgan/kassir/infrastructure/src/common.nix;
-    u = import /home/morgan/kassir/infrastructure/src/users.nix;
-  in pkgs.lib.lists.foldl' (a: b: a + b) "" (
-    pkgs.lib.attrsets.mapAttrsToList (n: v: "${v} ${n}\n") (
-      pkgs.lib.attrsets.mapAttrs (_: v: "${c.internalNetwork}.${builtins.toString v.networkId}") u
-    )
-  );
 
   # Select internationalisation properties.
   # i18n = {
@@ -37,7 +29,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget google-chrome git keepassxc tmate python wdiff psmisc zip nix-prefetch-git vim
+    wget google-chrome git tmate python wdiff psmisc zip nix-prefetch-git vim
     (import /etc/nixos/emacs.nix { inherit pkgs; }) postgresql texlive.combined.scheme-basic
     haskellPackages.ghc haskellPackages.cabal-install haskellPackages.stack gnumake gcc binutils-unwrapped
     nodejs-9_x gnupg dos2unix nix-serve easyrsa openvpn
@@ -99,54 +91,13 @@
   system.stateVersion = "18.03"; # Did you read the comment?
   system.autoUpgrade.enable = true;
 
-
-  # Postgres
-  services.postgresql.enable = true;
-  services.postgresql.package = pkgs.postgresql;
-  services.postgresql.authentication = pkgs.lib.mkForce ''
-    # Generated file; do not edit!
-    # TYPE  DATABASE        USER            ADDRESS                 METHOD
-    local   all             all                                     trust
-    host    all             all             127.0.0.1/32            trust
-    host    all             all             ::1/128                 trust
-    '';
-
-  services.openvpn.servers.kassir = {
-    autoStart = false;
-    config = ''
-      client
-      dev tun
-      proto tcp
-      remote vpn.kassir.io 1194
-      resolv-retry infinite
-      nobind
-      persist-key
-      persist-tun
-      ca /home/morgan/mnt/kassir-outer/vpn/ca.crt
-      cert /home/morgan/mnt/kassir-outer/vpn/morgan.crt
-      key /home/morgan/mnt/kassir-outer/vpn/morgan.key
-      remote-cert-tls server
-      tls-auth /home/morgan/mnt/kassir-outer/vpn/ta.key 1
-      cipher AES-256-CBC
-      verb 6
-      pull
-    '';
-  };
-
   fileSystems = {
-    "/home/morgan/mnt/kassir" = {
-      device = "/dev/disk/by-label/kassir-2";
-      fsType = "ext4";
-      options = [ "noauto" ];
-    };
-    "/home/morgan/mnt/kassir-outer" = {
-      device = "/dev/disk/by-label/SECURE_KEY_";
+    "/home/morgan/media/SECURE_KEY" = {
+      device = "/dev/disk/by-label/SECURE_KEY";
       fsType = "vfat";
-      options = [ "noauto" "x-systemd.automount" ];
+      options = [ "noauto" ];
     };
   };
 
   networking.timeServers = options.networking.timeServers.default;
-
-  nix.trustedBinaryCaches = [ "https://cache.kassir.io/" ];
 }
