@@ -20,7 +20,6 @@ Steps for creating a NixOS instance in VirtualBox using this config:
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
  }
- ```
  # nixos-install
  (set root password)
  # useradd morgan
