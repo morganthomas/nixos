@@ -32,7 +32,7 @@
     wget google-chrome git tmate python wdiff psmisc zip nix-prefetch-git vim
     (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
     haskellPackages.ghc haskellPackages.cabal-install haskellPackages.stack gnumake gcc binutils-unwrapped
-    gnupg dos2unix nix-serve
+    gnupg dos2unix nix-serve usbutils
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
