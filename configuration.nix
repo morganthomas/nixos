@@ -93,8 +93,8 @@
 
   fileSystems = {
     "/home/morgan/media/SECURE_KEY" = {
-      device = "/dev/disk/by-label/SECURE_KEY";
-      fsType = "vfat";
+      device = "/dev/disk/by-label/kassir";
+      fsType = "ext4";
       options = [ "noauto" ];
     };
   };
