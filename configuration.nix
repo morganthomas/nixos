@@ -29,7 +29,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget google-chrome git tmate python wdiff psmisc zip nix-prefetch-git vim
+    wget chromium git tmate python wdiff psmisc zip nix-prefetch-git vim
     (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
     haskellPackages.ghc haskellPackages.cabal-install haskellPackages.stack gnumake gcc binutils-unwrapped
     gnupg dos2unix nix-serve usbutils
