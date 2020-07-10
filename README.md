@@ -8,7 +8,7 @@ Steps for creating a NixOS instance in VirtualBox using this config:
 * Use `fdisk` or `parted` to create a single partition in the virtual hard drive. Format it as ext4 using `mkfs.ext4`.
 * Mount it on `/mnt`.
 * Generate configuration, install, and reboot: 
-```
+```bash
 # nixos-generate-config --root /mnt
 # cd /mnt/etc
 # mv nixos nixos-generated
@@ -29,5 +29,31 @@ Steps for creating a NixOS instance in VirtualBox using this config:
  # usermod -G wheel morgan
  # mkdir /home/morgan
  # chown morgan:users /home/morgan
+ # dd if=/dev/zero of=/swapfile bs=1G count=8
+ # mkswap /swapfile
  # shutdown now
  ```
+ 
+ After booting and logging in as Morgan, take the following steps:
+ 
+ ```bash
+ $ mkdir media/SECURE_KEY
+ $ sudo mount media/SECURE_KEY
+ $ mkdir .ssh
+ $ ln -s ~/media/SECURE_KEY/platonic ~/.ssh/platonic
+ $ ln -s ~/media/SECURE_KEY/platonic.pub ~/.ssh/platonic.pub
+ $ ssh-add ~/.ssh/platonic
+ $ git clone git@github.com:morganthomas/dotfiles.git
+ ```
+
+To install NixOS on a real PC which supports BIOS, follow the same steps with the following modifications:
+ 
+ * Use `sudo blkid` after inserting the Apricorn key to determine its UUID and set its `device` property under `fileSystems` to `/dev/disk/by-uuid/{UUID}`
+ 
+ It's possible to use an Apricorn key as NixOS installation medium using a command like this to write the image:
+ 
+ ```bash
+ # dd if=image.iso of=/dev/sdb bs=1024
+ ```
+ 
+ In order for a computer to boot from the Apricorn key, it must be placed in lock override mode so that it will not lock up during the boot process.
