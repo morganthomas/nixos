@@ -46,10 +46,6 @@ Steps for creating a NixOS instance in VirtualBox using this config:
  $ git clone git@github.com:morganthomas/dotfiles.git
  ```
 
-To install NixOS on a real PC which supports BIOS, follow the same steps with the following modifications:
- 
- * Use `sudo blkid` after inserting the Apricorn key to determine its UUID and set its `device` property under `fileSystems` to `/dev/disk/by-uuid/{UUID}`
- 
  It's possible to use an Apricorn key as NixOS installation medium using a command like this to write the image:
  
  ```bash
