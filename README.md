@@ -22,6 +22,7 @@ Steps for creating a NixOS instance in VirtualBox using this config:
  }
  # nixos-install
  (set root password)
+ # nixos-enter
  # useradd morgan
  # passwd morgan
  (set morgan password)
