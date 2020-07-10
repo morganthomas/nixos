@@ -110,10 +110,10 @@
   };
   
   systemd.automounts = [
-    { where = "/home/morgan/media/SECURE_KEY"
-    , wantedBy = [ "default.target" ] }
-  , { where = "/home/morgan/media/SECURE_KEY_VIRT"
-    , wantedBy = [ "default.target" ] }
+    { where = "/home/morgan/media/SECURE_KEY";
+     wantedBy = [ "default.target" ]; }
+    { where = "/home/morgan/media/SECURE_KEY_VIRT";
+      wantedBy = [ "default.target" ]; }
   ];
   
   swapDevices = [{ device = "/swapfile"; }];
