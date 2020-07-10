@@ -37,7 +37,7 @@ Steps for creating a NixOS instance in VirtualBox using this config:
  After booting and logging in as Morgan, take the following steps:
  
  ```bash
- $ mkdir media/SECURE_KEY
+ $ mkdir -p media/SECURE_KEY
  $ sudo mount media/SECURE_KEY
  $ mkdir .ssh
  $ ln -s ~/media/SECURE_KEY/platonic ~/.ssh/platonic
