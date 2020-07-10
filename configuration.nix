@@ -97,11 +97,23 @@
   system.autoUpgrade.enable = true;
 
   fileSystems = {
-    "/home/morgan/media/SECURE_KEY" = {
+    "/home/morgan/media/SECURE_KEY_VIRT" = {
       device = "/dev/disk/by-label/kassir";
       fsType = "ext4";
       options = [ "noauto" ];
     };
+    "/home/morgan/media/SECURE_KEY" = {
+      device = "/dev/disk/by-uuid/5645-D0FE";
+      fsType = "vfat";
+      options = [ "noauto" ];
+    };
+  };
+  
+  systemd.automounts = {
+    { where = "/home/morgan/media/SECURE_KEY"
+    , wantedBy = [ "default.target" ] }
+  , { where = "/home/morgan/media/SECURE_KEY_VIRT"
+    , wantedBy = [ "default.target" ] }
   };
   
   swapDevices = [{ device = "/swapfile"; }];
