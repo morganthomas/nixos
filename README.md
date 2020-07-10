@@ -27,5 +27,7 @@ Steps for creating a NixOS instance in VirtualBox using this config:
  # passwd morgan
  (set morgan password)
  # usermod -G wheel morgan
+ # mkdir /home/morgan
+ # chown morgan:users /home/morgan
  # shutdown now
  ```
