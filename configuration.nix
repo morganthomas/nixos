@@ -32,7 +32,7 @@
     wget chromium git tmate python wdiff psmisc zip nix-prefetch-git vim
     (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
     haskellPackages.ghc haskellPackages.cabal-install haskellPackages.stack gnumake gcc binutils-unwrapped
-    gnupg dos2unix nix-serve usbutils xmobar xmonad-contrib htop
+    gnupg dos2unix nix-serve usbutils xmobar htop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -65,7 +65,10 @@
   services.xserver.enable = true;
   services.xserver.layout = "us,us";
   services.xserver.xkbVariant = ",dvorak";
-  services.xserver.windowManager.xmonad.enable = true;
+  services.xserver.windowManager.xmonad = {
+    enable = true;
+    enableContribAndExtras = true;
+  };
   services.xserver.xkbOptions = "ctrl:swapcaps,grp:ctrl_shift_toggle";
   services.xserver.videoDrivers = [ "intel" ];
   # services.xserver.xkbOptions = "eurosign:e";
