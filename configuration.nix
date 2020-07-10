@@ -98,6 +98,8 @@
       options = [ "noauto" ];
     };
   };
+  
+  swapDevices = [{ device = "/swapfile"; }];
 
   networking.timeServers = options.networking.timeServers.default;
   
