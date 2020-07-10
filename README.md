@@ -55,4 +55,4 @@ Steps for creating a NixOS instance on a VirtualBox VM or bare metal with BIOS s
  # dd if=image.iso of=/dev/sdb bs=1024
  ```
  
- In order for a computer to boot from the Apricorn key, it must be placed in lock override mode so that it will not lock up during the boot process.
+ In order for a computer to boot from the Apricorn key, the key must be placed in lock override mode so that it will not lock up during the boot process.
