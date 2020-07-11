@@ -45,7 +45,7 @@ For a computer in legacy BIOS (non-UEFI) mode put in bootloader.nix:
 {
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda"; # or whatever is the boot device
+  boot.loader.grub.device = "$medium";
  }
  ```
  For a computer in UEFI mode put in bootloader.nix:
