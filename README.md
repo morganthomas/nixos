@@ -8,8 +8,29 @@ Prerequisite for creating a NixOS instance in VirtualBox using this config:
 Steps for creating a NixOS instance on a VirtualBox VM or bare metal PC:
 
 * Download a NixOS installer ISO image. Boot the machine into it.
-* Use `fdisk` or `parted` to create a single partition in the virtual hard drive (for legacy BIOS) or two partitions including a 512MB FAT32 boot partition (for UEFI). Format the main partition as ext4 using `mkfs.ext4`.
-* Mount it on `/mnt`.
+* Use `lsblk` to find the medium you will install to.
+* Create a single partition in the installation target medium (for legacy BIOS) or two partitions including a 512MB FAT32 boot partition (for UEFI). 
+  * For UEFI:
+```bash
+sudo parted $medium -- mklabel gpt
+sudo parted $medium -- mkpart primary 512MiB 100%
+sudo parted $medium -- mkpart ESP fat32 1MiB 512MiB
+sudo parted $medium -- set 2 boot on
+sudo mkfs.ext4 $mediumPartition1
+sudo mkfs.fat -F 32 -n boot $mediumPartition2
+```
+   * For BIOS:
+```bash
+sudo fdisk $medium
+p
+d # repeat for each partition
+n
+# accept all defaults to make a new partition taking up all the free space
+w
+sudo mkfs.ext4 $mediumPartition
+```
+* Mount the installation target medium on `/mnt`.
+* For UEFI, `sudo mkdir /mnt/boot` and mount the boot partition on `/mnt/boot`.
 * Generate configuration, install, and reboot: 
 ```bash
 sudo nixos-generate-config --root /mnt
