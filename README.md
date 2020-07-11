@@ -46,6 +46,7 @@ For a computer in legacy BIOS (non-UEFI) mode put in bootloader.nix:
  mkdir /home/morgan
  chown morgan:users /home/morgan
  dd if=/dev/zero of=/swapfile bs=1G count=8
+ chmod 600 /swapfile
  mkswap /swapfile
  (ctrl+d to exit chroot)
  sudo shutdown now
