@@ -104,7 +104,7 @@
     };
     "/home/morgan/media/SECURE_KEY" = {
       device = "/dev/disk/by-uuid/C470-4BC9";
-      fsType = "fat";
+      fsType = "vfat";
       options = [ "noauto" ];
     };
   };
