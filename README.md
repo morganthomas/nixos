@@ -10,7 +10,7 @@ Steps for creating a NixOS instance on a VirtualBox VM or bare metal PC:
 * Download a NixOS installer ISO image. Boot the machine into it.
 * Use `lsblk` to find the medium you will install to.
 * Create a single partition in the installation target medium (for legacy BIOS) or two partitions including a 512MB FAT32 boot partition (for UEFI). 
-  * For UEFI:
+* For UEFI:
 ```bash
 sudo parted $medium -- mklabel gpt
 sudo parted $medium -- mkpart primary 512MiB 100%
