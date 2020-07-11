@@ -12,12 +12,12 @@ Steps for creating a NixOS instance on a VirtualBox VM or bare metal PC:
 * Mount it on `/mnt`.
 * Generate configuration, install, and reboot: 
 ```bash
-# nixos-generate-config --root /mnt
-# cd /mnt/etc
-# mv nixos nixos-generated
-# nix-shell -p git --command "git clone https://github.com/morganthomas/nixos.git"
-# cp nixos-generated/hardware-configuration.nix nixos
-# nano nixos/bootloader.nix
+sudo nixos-generate-config --root /mnt
+sudo cd /mnt/etc
+sudo mv nixos nixos-generated
+sudo nix-shell -p git --command "git clone https://github.com/morganthomas/nixos.git"
+sudo cp nixos-generated/hardware-configuration.nix nixos
+sudo nano nixos/bootloader.nix
 ```
 For a computer in legacy BIOS (non-UEFI) mode put in bootloader.nix:
 ```
@@ -36,31 +36,31 @@ For a computer in legacy BIOS (non-UEFI) mode put in bootloader.nix:
  ```
  Then:
 ```bash 
- # nixos-install
- (set root password)
- # nixos-enter
- # useradd morgan
- # passwd morgan
- (set morgan password)
- # usermod -G wheel morgan
- # mkdir /home/morgan
- # chown morgan:users /home/morgan
- # dd if=/dev/zero of=/swapfile bs=1G count=8
- # mkswap /swapfile
+ sudo nixos-install
+ # set root password
+ sudo nixos-enter
+ useradd morgan
+ passwd morgan
+ # set morgan password
+ usermod -G wheel morgan
+ mkdir /home/morgan
+ chown morgan:users /home/morgan
+ dd if=/dev/zero of=/swapfile bs=1G count=8
+ mkswap /swapfile
  (ctrl+d to exit chroot)
- # shutdown now
+ sudo shutdown now
  ```
  
  After booting and logging in as Morgan, take the following steps:
  
  ```bash
- $ mkdir -p media/SECURE_KEY
- $ sudo mount media/SECURE_KEY
- $ mkdir .ssh
- $ ln -s ~/media/SECURE_KEY/platonic ~/.ssh/platonic
- $ ln -s ~/media/SECURE_KEY/platonic.pub ~/.ssh/platonic.pub
- $ ssh-add ~/.ssh/platonic
- $ git clone git@github.com:morganthomas/dotfiles.git
+ mkdir -p media/SECURE_KEY
+ sudo mount media/SECURE_KEY
+ mkdir .ssh
+ ln -s ~/media/SECURE_KEY/platonic ~/.ssh/platonic
+ ln -s ~/media/SECURE_KEY/platonic.pub ~/.ssh/platonic.pub
+ ssh-add ~/.ssh/platonic
+ git clone git@github.com:morganthomas/dotfiles.git
  ```
  
  Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder.
@@ -68,7 +68,7 @@ For a computer in legacy BIOS (non-UEFI) mode put in bootloader.nix:
  It's possible to use an Apricorn key as NixOS installation medium using a command like this to write the image:
  
  ```bash
- # dd if=image.iso of=/dev/sdb bs=1024
+ dd if=image.iso of=/dev/sdb bs=1024
  ```
  
  In order for a computer to boot from the Apricorn key, the key must be placed in lock override mode so that it will not lock up during the boot process.
