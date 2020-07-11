@@ -34,6 +34,7 @@ Steps for creating a NixOS instance on a VirtualBox VM or bare metal with BIOS s
  # chown morgan:users /home/morgan
  # dd if=/dev/zero of=/swapfile bs=1G count=8
  # mkswap /swapfile
+ (ctrl+d to exit chroot)
  # shutdown now
  ```
  
