@@ -5,10 +5,10 @@ Prerequisite for creating a NixOS instance in VirtualBox using this config:
 * Create a VM with your desired settings.
 * Add the virtual disk image file contained in the Apricorn key to the VM as a virtual hard drive. Reference it by label in configuration.nix. It does not work to add the Apricon key as a USB device. NixOS is not able to see it when it is added that way.
 
-Steps for creating a NixOS instance on a VirtualBox VM or bare metal with BIOS support:
+Steps for creating a NixOS instance on a VirtualBox VM or bare metal PC:
 
 * Download a NixOS installer ISO image. Boot the machine into it.
-* Use `fdisk` or `parted` to create a single partition in the virtual hard drive. Format it as ext4 using `mkfs.ext4`.
+* Use `fdisk` or `parted` to create a single partition in the virtual hard drive (for legacy BIOS) or two partitions including a 512MB FAT32 boot partition (for UEFI). Format the main partition as ext4 using `mkfs.ext4`.
 * Mount it on `/mnt`.
 * Generate configuration, install, and reboot: 
 ```bash
@@ -18,11 +18,24 @@ Steps for creating a NixOS instance on a VirtualBox VM or bare metal with BIOS s
 # nix-shell -p git --command "git clone https://github.com/morganthomas/nixos.git"
 # cp nixos-generated/hardware-configuration.nix nixos
 # nano nixos/bootloader.nix
+```
+For a computer in legacy BIOS (non-UEFI) mode put in bootloader.nix:
+```
 {
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.device = "/dev/sda"; # or whatever is the boot device
  }
+ ```
+ For a computer in UEFI mode put in bootloader.nix:
+ ```
+ {
+   boot.loader.systemd-boot.enable = true;
+   boot.loader.efi.canTouchEfiVariables = true;
+ }
+ ```
+ Then:
+```bash 
  # nixos-install
  (set root password)
  # nixos-enter
