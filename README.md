@@ -55,6 +55,12 @@ For a computer in legacy BIOS (non-UEFI) mode put in bootloader.nix:
    boot.loader.efi.canTouchEfiVariables = true;
  }
  ```
+Add a hostname in hostname.nix:
+```
+{
+  networking.hostName = "$hostname";
+}
+```
  Then:
 ```bash 
  sudo nixos-install
