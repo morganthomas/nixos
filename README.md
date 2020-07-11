@@ -49,6 +49,8 @@ Steps for creating a NixOS instance on a VirtualBox VM or bare metal with BIOS s
  $ ssh-add ~/.ssh/platonic
  $ git clone git@github.com:morganthomas/dotfiles.git
  ```
+ 
+ Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder.
 
  It's possible to use an Apricorn key as NixOS installation medium using a command like this to write the image:
  
