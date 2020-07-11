@@ -1,0 +1,3 @@
+bootloader.nix
+hardware-configuration.nix
+hostname.nix
