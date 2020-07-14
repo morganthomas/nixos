@@ -14,9 +14,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.wireless.networks = { anobjectis = { psk = "aconcretemonoid"; }; };
+  networking.networkmanager.enable = true;
 
   # Select internationalisation properties.
   # i18n = {
@@ -34,7 +32,7 @@
     wget chromium git tmate python wdiff psmisc zip nix-prefetch-git vim
     (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
     haskellPackages.ghc haskellPackages.cabal-install haskellPackages.stack gnumake gcc binutils-unwrapped
-    gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu
+    gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -123,4 +121,15 @@
   
   nix.binaryCaches = [ "https://nixcache.reflex-frp.org" "https://cache.nixos.org" "https://shpadoinkle.cachix.org" ];
   nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8=" ];
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql96;
+    authentication = pkgs.lib.mkForce ''
+    local all all trust
+    host  all all 127.0.0.1/32 trust
+    host  all all ::1/128      trust
+    host  all all 0.0.0.0/0    trust
+    '';
+  };
 }
