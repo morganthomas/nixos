@@ -63,7 +63,9 @@ Add a hostname in hostname.nix:
 ```
 Set the number of build cores in hardware-configuration.nix to equal the number of virtual cores minus one:
 ```nix
-  nix.buildCores = $n;
+{
+  nix.buildCores = 7;
+}
 ```
  Then:
 ```bash 
