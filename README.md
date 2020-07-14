@@ -69,7 +69,7 @@ Add a hostname in hostname.nix:
  useradd morgan
  passwd morgan
  # set morgan password
- usermod -G wheel morgan
+ usermod -G wheel,networkmanager morgan
  mkdir /home/morgan
  chown morgan:users /home/morgan
  dd if=/dev/zero of=/swapfile bs=1G count=8
