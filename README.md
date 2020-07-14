@@ -41,7 +41,7 @@ sudo cp nixos-generated/hardware-configuration.nix nixos
 sudo nano nixos/bootloader.nix
 ```
 For a computer in legacy BIOS (non-UEFI) mode put in bootloader.nix:
-```
+```nix
 {
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -49,17 +49,21 @@ For a computer in legacy BIOS (non-UEFI) mode put in bootloader.nix:
  }
  ```
  For a computer in UEFI mode put in bootloader.nix:
- ```
+ ```nix
  {
    boot.loader.systemd-boot.enable = true;
    boot.loader.efi.canTouchEfiVariables = true;
  }
  ```
 Add a hostname in hostname.nix:
-```
+```nix
 {
   networking.hostName = "$hostname";
 }
+```
+Set the number of build cores in hardware-configuration.nix to equal the number of virtual cores minus one:
+```nix
+  nix.buildCores = $n;
 ```
  Then:
 ```bash 
