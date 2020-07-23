@@ -75,7 +75,7 @@ Set the number of build cores in hardware-configuration.nix to equal the number 
  useradd morgan
  passwd morgan
  # set morgan password
- usermod -G wheel,networkmanager morgan
+ usermod -G wheel,networkmanager,docker morgan
  mkdir /home/morgan
  chown morgan:users /home/morgan
  dd if=/dev/zero of=/swapfile bs=1G count=8
