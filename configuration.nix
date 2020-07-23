@@ -31,9 +31,12 @@
   environment.systemPackages = with pkgs; [
     wget chromium git tmate python wdiff psmisc zip nix-prefetch-git vim
     (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
-    gnumake gcc binutils-unwrapped ncurses5 zlib.dev
+    gnumake gcc binutils-unwrapped ncurses5 zlib.dev mkpasswd qemu
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
+    mongodb mattermost-desktop
   ];
+
+  services.mongodb.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
