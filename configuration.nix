@@ -33,7 +33,7 @@
     (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev weechat scrot
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
-    mongodb mattermost-desktop mkpasswd qemu
+    mongodb mattermost-desktop mkpasswd qemu nodejs
   ];
 
   services.mongodb.enable = true;
