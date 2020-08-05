@@ -69,13 +69,10 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.layout = "us,us";
-  services.xserver.xkbVariant = ",dvorak";
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
   };
-  services.xserver.xkbOptions = "ctrl:swapcaps,grp:ctrl_shift_toggle";
   services.xserver.videoDrivers = [ "intel" ];
   # services.xserver.xkbOptions = "eurosign:e";
 
@@ -100,19 +97,6 @@
   system.stateVersion = "20.03"; # Did you read the comment?
   system.autoUpgrade.enable = true;
 
-  fileSystems = {
-    "/home/morgan/media/SECURE_KEY" = {
-      device = "/dev/disk/by-uuid/C470-4BC9";
-      fsType = "vfat";
-      options = [ "noauto" ];
-    };
-  };
-  
-  systemd.automounts = [
-    { where = "/home/morgan/media/SECURE_KEY";
-     wantedBy = [ "default.target" ]; }
-  ];
-  
   swapDevices = [{ device = "/swapfile"; }];
 
   networking.timeServers = options.networking.timeServers.default;
