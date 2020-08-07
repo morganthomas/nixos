@@ -34,7 +34,7 @@ sudo mkfs.ext4 $mediumPartition
 * Generate configuration, install, and reboot: 
 ```bash
 sudo nixos-generate-config --root /mnt
-sudo cd /mnt/etc
+cd /mnt/etc
 sudo mv nixos nixos-generated
 sudo nix-shell -p git --command "git clone https://github.com/morganthomas/nixos.git"
 sudo cp nixos-generated/hardware-configuration.nix nixos
