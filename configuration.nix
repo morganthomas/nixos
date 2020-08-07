@@ -30,7 +30,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget chromium git tmate python wdiff psmisc zip nix-prefetch-git vim
-    texlive.combined.scheme-basic
+    (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev weechat scrot
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
     mongodb mattermost-desktop mkpasswd qemu nodejs nodePackages.node2nix
