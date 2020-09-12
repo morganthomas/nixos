@@ -29,12 +29,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wget chromium git tmate python wdiff psmisc zip nix-prefetch-git vim
+    wget chromium git tmate wdiff psmisc zip nix-prefetch-git vim
     (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev weechat scrot
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
     mongodb mattermost-desktop mkpasswd qemu nodejs nodePackages.node2nix
-    ghostscript kate zip unzip rpmextract
+    ghostscript kate zip unzip rpmextract openfortivpn slack python3 zeromq conda
   ];
 
   services.mongodb.enable = true;
@@ -129,5 +129,6 @@
     host  all all ::1/128      trust
     host  all all 0.0.0.0/0    trust
     '';
+    extraConfig = "\nlog_statement='all'\n";
   };
 }
