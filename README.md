@@ -2,8 +2,10 @@ My NixOS configuration.
 
 Prerequisite for creating a NixOS instance in VirtualBox using this config:
 
-* Create a VM with your desired settings.
+* Create a VM with your desired settings. Rememnber to set the desired number of CPU cores. Set the graphics controller in the display settings to VMSVGA.
 * Add the virtual disk image file contained in the Apricorn key to the VM as a virtual hard drive. Reference it by label in configuration.nix. It does not work to add the Apricon key as a USB device. NixOS is not able to see it when it is added that way.
+* Use the instructions for a BIOS system.
+* Use the virtualbox branch of this code as opposed to the master branch
 
 Steps for creating a NixOS instance on a VirtualBox VM or bare metal PC:
 
@@ -34,7 +36,7 @@ sudo mkfs.ext4 $mediumPartition
 * Generate configuration, install, and reboot: 
 ```bash
 sudo nixos-generate-config --root /mnt
-sudo cd /mnt/etc
+cd /mnt/etc
 sudo mv nixos nixos-generated
 sudo nix-shell -p git --command "git clone https://github.com/morganthomas/nixos.git"
 sudo cp nixos-generated/hardware-configuration.nix nixos
