@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./hostname.nix
+      ./interos-portal/nixos/interos.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -34,10 +35,14 @@
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev weechat scrot
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
     mongodb mattermost-desktop mkpasswd qemu nodejs nodePackages.node2nix
-    ghostscript kate zip unzip rpmextract openfortivpn slack python3 zeromq conda
+    ghostscript kate zip unzip rpmextract openfortivpn slack python37 python37Packages.pip
+    ngrok-2 nodePackages."@vue/cli" ghc influxdb firefox libreoffice inkscape zoom-us
+    pcre pcre.dev
   ];
 
   services.mongodb.enable = true;
+  services.influxdb.enable = true;
+  services.influxdb.dataDir = "/var/db/influxdb";
   virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -129,6 +134,5 @@
     host  all all ::1/128      trust
     host  all all 0.0.0.0/0    trust
     '';
-    extraConfig = "\nlog_statement='all'\n";
   };
 }
