@@ -34,7 +34,7 @@
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev weechat scrot
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
     mongodb mattermost-desktop mkpasswd qemu nodejs nodePackages.node2nix
-    ghostscript kate zip unzip rpmextract
+    ghostscript kate zip unzip rpmextract i7z vlc nginx ghc
   ];
 
   services.mongodb.enable = true;
