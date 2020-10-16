@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./hostname.nix
-      # ./interos-portal/nixos/interos.nix
+      ./interos-portal/nixos/interos.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -36,7 +36,7 @@
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
     mongodb mattermost-desktop mkpasswd qemu nodejs nodePackages.node2nix
     ghostscript kate zip unzip rpmextract openfortivpn slack python37 python37Packages.pip
-    i7z nginx ghc iftop
+    i7z nginx ghc iftop ardour ffmpeg
     ngrok-2 nodePackages."@vue/cli" ghc influxdb firefox libreoffice inkscape zoom-us
     pcre pcre.dev
   ];
