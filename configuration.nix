@@ -25,7 +25,7 @@
   # };
 
   # Set your time zone.
-  time.timeZone = "America/Denver";
+  time.timeZone = "America/New_York";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -84,6 +84,34 @@
   services.xserver.xkbOptions = "ctrl:swapcaps,grp:ctrl_shift_toggle";
   services.xserver.videoDrivers = [ "intel" ];
   # services.xserver.xkbOptions = "eurosign:e";
+
+  systemd.services.mute = with pkgs; {
+    serviceConfig.type = "oneshot";
+    script = ''
+      ${alsaUtils}/bin/amixer sset Master mute
+    '';
+  };
+
+  systemd.services.unmute = with pkgs; {
+    serviceConfig.type = "oneshot";
+    script = ''
+      ${alsaUtils}/bin/amixer sset Master unmute
+    '';
+  };
+
+  systemd.timers.mute = {
+    wantedBy = [ "timers.target" ];
+    partOf = [ "mute.service" ];
+    timerConfig.OnCalendar = "*-*-* 00:00:00";
+    timerConfig.Persistent = true;
+  };
+
+  systemd.timers.unmute = {
+    wantedBy = [ "timers.target" ];
+    partOf = [ "unmute.service" ];
+    timerConfig.OnCalendar = "*-*-* 09:00:00";
+    timerConfig.Persistent = true;
+  };
 
   # Enable touchpad support.
   # services.xserver.libinput.enable = true;
