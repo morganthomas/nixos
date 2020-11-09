@@ -31,16 +31,25 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget chromium git tmate wdiff psmisc zip nix-prefetch-git vim
-    (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
+    (import ./emacs.nix { inherit pkgs; })
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev weechat scrot
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
-    mongodb mattermost-desktop mkpasswd qemu nodejs nodePackages.node2nix
-    ghostscript kate zip unzip rpmextract openfortivpn slack python37 python37Packages.pip
+    mongodb mkpasswd nodejs nodePackages.node2nix
+    ghostscript zip unzip rpmextract openfortivpn python37 python37Packages.pip
     i7z nginx ghc iftop ardour ffmpeg
-    ngrok-2 nodePackages."@vue/cli" ghc influxdb firefox libreoffice inkscape zoom-us
-    pcre pcre.dev
+    ghc influxdb libreoffice youtube-dl vlc pavucontrol
+    pcre pcre.dev awscli jq #chromedriver
   ];
 
+  hardware.bluetooth.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+    zeroconf.discovery.enable = true;
+  };
+  services.blueman.enable = true;
+  services.printing.enable = true;
+  services.printing.drivers = [ pkgs.gutenprint pkgs.brlaser ];
   services.mongodb.enable = true;
   services.influxdb.enable = true;
   services.influxdb.dataDir = "/var/db/influxdb";
