@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./hostname.nix
+      ./interos-portal/nixos/interos.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -24,17 +25,17 @@
   # };
 
   # Set your time zone.
-  time.timeZone = "America/Denver";
+  time.timeZone = "America/New_York";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget chromium git tmate wdiff psmisc zip nix-prefetch-git vim
-    (import ./emacs.nix { inherit pkgs; }) texlive.combined.scheme-basic
+    (import ./emacs.nix { inherit pkgs; })
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev weechat scrot
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
     mongodb mattermost-desktop mkpasswd qemu nodejs nodePackages.node2nix
-    ghostscript kate zip unzip rpmextract virtualbox openfortivpn slack python3 zeromq conda
+    ghostscript kate zip unzip rpmextract virtualbox openfortivpn
   ];
 
   services.mongodb.enable = true;
@@ -85,13 +86,10 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.layout = "us,us";
-  services.xserver.xkbVariant = ",dvorak";
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
   };
-  services.xserver.xkbOptions = "ctrl:swapcaps,grp:ctrl_shift_toggle";
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable touchpad support.
@@ -115,19 +113,6 @@
   system.stateVersion = "20.03"; # Did you read the comment?
   system.autoUpgrade.enable = true;
 
-  fileSystems = {
-    "/home/morgan/media/SECURE_KEY" = {
-      device = "/dev/disk/by-uuid/C470-4BC9";
-      fsType = "vfat";
-      options = [ "noauto" ];
-    };
-  };
-  
-  systemd.automounts = [
-    { where = "/home/morgan/media/SECURE_KEY";
-     wantedBy = [ "default.target" ]; }
-  ];
-  
   swapDevices = [{ device = "/swapfile"; }];
 
   networking.timeServers = options.networking.timeServers.default;
@@ -137,13 +122,12 @@
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql96;
+    package = pkgs.postgresql_12;
     authentication = pkgs.lib.mkForce ''
     local all all trust
     host  all all 127.0.0.1/32 trust
     host  all all ::1/128      trust
     host  all all 0.0.0.0/0    trust
     '';
-    extraConfig = "\nlog_statement='all'\n";
   };
 }
