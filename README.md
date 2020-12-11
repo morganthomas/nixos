@@ -37,6 +37,9 @@ sudo nixos-generate-config --root /mnt
 sudo cd /mnt/etc
 sudo mv nixos nixos-generated
 sudo nix-shell -p git --command "git clone https://github.com/morganthomas/nixos.git"
+cd nixos
+sudo nix-shell -p git --command "git checkout generic"
+cd ..
 sudo cp nixos-generated/hardware-configuration.nix nixos
 sudo nano nixos/bootloader.nix
 ```
