@@ -88,23 +88,7 @@ Set the number of build cores in hardware-configuration.nix to equal the number 
  After booting and logging in as Morgan, take the following steps:
  
  ```bash
- mkdir -p media/SECURE_KEY
- sudo mount media/SECURE_KEY
- mkdir .ssh
- ln -s ~/media/SECURE_KEY/platonic ~/.ssh/platonic
- ln -s ~/media/SECURE_KEY/platonic.pub ~/.ssh/platonic.pub
- ssh-add ~/.ssh/platonic
  git clone git@github.com:morganthomas/dotfiles.git
  ```
  
  Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder.
-
- It's possible to use an Apricorn key as NixOS installation medium using a command like this to write the image:
- 
- ```bash
- dd if=image.iso of=/dev/sdb bs=1024
- ```
- 
- In order for a computer to boot from the Apricorn key, the key must be placed in lock override mode so that it will not lock up during the boot process.
-
-Note that when updating xmobarrc, you may need to `killall xmobar` before mod+q to see the changes to xmobar.
