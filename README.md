@@ -88,10 +88,10 @@ Set the number of build cores in hardware-configuration.nix to equal the number 
  sudo shutdown now
  ```
  
- After booting and logging in as Morgan, take the following steps:
+ After booting and logging in, use alt+shift+enter to open a shell. Then:
  
  ```bash
  git clone git@github.com:morganthomas/dotfiles.git
  ```
  
- Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder.
+ Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder. Note that `mv` with globs will not include dotfiles, so you may need to copy each thing individually. Reboot to reload your configs. To get a nicer font in Tilix, open the hamburger menu on the top right and go to Preferences > Profiles > Default and check the box next to "Custom font."
