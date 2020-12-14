@@ -71,7 +71,6 @@
     enable = true;
     enableContribAndExtras = true;
   };
-  services.xserver.videoDrivers = [ "intel" ];
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable touchpad support.
