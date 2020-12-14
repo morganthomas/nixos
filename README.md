@@ -37,6 +37,9 @@ sudo nixos-generate-config --root /mnt
 sudo cd /mnt/etc
 sudo mv nixos nixos-generated
 sudo nix-shell -p git --command "git clone https://github.com/morganthomas/nixos.git"
+cd nixos
+sudo nix-shell -p git --command "git checkout generic"
+cd ..
 sudo cp nixos-generated/hardware-configuration.nix nixos
 sudo nano nixos/bootloader.nix
 ```
@@ -85,26 +88,10 @@ Set the number of build cores in hardware-configuration.nix to equal the number 
  sudo shutdown now
  ```
  
- After booting and logging in as Morgan, take the following steps:
+ After booting and logging in, use alt+shift+enter to open a shell. Then:
  
  ```bash
- mkdir -p media/SECURE_KEY
- sudo mount media/SECURE_KEY
- mkdir .ssh
- ln -s ~/media/SECURE_KEY/platonic ~/.ssh/platonic
- ln -s ~/media/SECURE_KEY/platonic.pub ~/.ssh/platonic.pub
- ssh-add ~/.ssh/platonic
  git clone git@github.com:morganthomas/dotfiles.git
  ```
  
- Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder.
-
- It's possible to use an Apricorn key as NixOS installation medium using a command like this to write the image:
- 
- ```bash
- dd if=image.iso of=/dev/sdb bs=1024
- ```
- 
- In order for a computer to boot from the Apricorn key, the key must be placed in lock override mode so that it will not lock up during the boot process.
-
-Note that when updating xmobarrc, you may need to `killall xmobar` before mod+q to see the changes to xmobar.
+ Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder. Note that `mv` with globs will not include dotfiles, so you may need to copy each thing individually. Reboot to reload your configs. To get a nicer font in Tilix, open the hamburger menu on the top right and go to Preferences > Profiles > Default and check the box next to "Custom font." Use alt+p and type the name of an app (e.g. "chromium") to launch it. Use alt+<number> to switch to a virtual desktop of a given number. Use alt+shift+<number> with a given window focused to move the window to a virtual desktop of a given number. Google "xmonad shortcuts" for more things you can do to manage windows in xmonad.
