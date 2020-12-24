@@ -10,7 +10,6 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./hostname.nix
-      ./interos-portal/nixos/interos.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -31,28 +30,15 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget chromium git tmate wdiff psmisc zip nix-prefetch-git vim
-    (import ./emacs.nix { inherit pkgs; })
-    gnumake gcc binutils-unwrapped ncurses5 zlib.dev weechat scrot
+    gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
     gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
-    mongodb mkpasswd nodejs nodePackages.node2nix
-    ghostscript zip unzip rpmextract openfortivpn python37 python37Packages.pip
-    i7z nginx ghc iftop ardour ffmpeg
-    ghc influxdb libreoffice youtube-dl vlc pavucontrol
-    pcre pcre.dev awscli jq #chromedriver
+    mkpasswd zip unzip openfortivpn i7z nginx iftop ardour ffmpeg
+    youtube-dl vlc awscli ghc patchelf
   ];
 
-  hardware.bluetooth.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
-    zeroconf.discovery.enable = true;
-  };
-  services.blueman.enable = true;
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.gutenprint pkgs.brlaser ];
   services.mongodb.enable = true;
-  services.influxdb.enable = true;
-  services.influxdb.dataDir = "/var/db/influxdb";
   virtualisation.docker.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -140,7 +126,7 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "20.03"; # Did you read the comment?
+  system.stateVersion = "20.09"; # Did you read the comment?
   system.autoUpgrade.enable = true;
 
   fileSystems = {
@@ -160,8 +146,8 @@
 
   networking.timeServers = options.networking.timeServers.default;
   
-  nix.binaryCaches = [ "https://nixcache.reflex-frp.org" "https://cache.nixos.org" "https://shpadoinkle.cachix.org" "https://nixcache.kadena.io" "https://hydra.iohk.io" ];
-  nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8=" "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" "kadena-cache.local-1:8wj8JW8V9tmc5bgNNyPM18DYNA1ws3X/MChXh1AQy/Q=" ];
+  nix.binaryCaches = [ "https://nixcache.reflex-frp.org" "https://cache.nixos.org" "https://shpadoinkle.cachix.org" "https://hydra.iohk.io" ];
+  nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8=" "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" ];
 
   services.postgresql = {
     enable = true;
