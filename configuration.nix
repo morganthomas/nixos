@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./hostname.nix
+      ./kernel.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
