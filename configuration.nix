@@ -31,11 +31,16 @@
   environment.systemPackages = with pkgs; [
     wget chromium git tmate wdiff psmisc zip nix-prefetch-git vim
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
-    gnupg dos2unix nix-serve usbutils xmobar htop fd tilix dmenu networkmanager
+    gnupg dos2unix nix-serve usbutils xmobar bpytop fd tilix dmenu networkmanager
     mkpasswd zip unzip openfortivpn i7z nginx iftop ardour ffmpeg
-    youtube-dl vlc awscli ghc patchelf
+    youtube-dl vlc awscli ghc patchelf stack vscode pavucontrol
   ];
 
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+    zeroconf.discovery.enable = true;
+  };
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.gutenprint pkgs.brlaser ];
   services.mongodb.enable = true;
@@ -146,8 +151,8 @@
 
   networking.timeServers = options.networking.timeServers.default;
   
-  nix.binaryCaches = [ "https://nixcache.reflex-frp.org" "https://cache.nixos.org" "https://shpadoinkle.cachix.org" "https://hydra.iohk.io" ];
-  nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8=" "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ=" ];
+  nix.binaryCaches = [ "https://nixcache.reflex-frp.org" "https://cache.nixos.org" "https://shpadoinkle.cachix.org" ];
+  nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8=" ];
 
   services.postgresql = {
     enable = true;
