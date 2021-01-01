@@ -10,7 +10,10 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./hostname.nix
+      ./kernel.nix
     ];
+
+  boot.kernelParams = [ "mitigations=off" ];
 
   nixpkgs.config.allowUnfree = true;
 
