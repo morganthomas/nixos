@@ -13,8 +13,6 @@
       ./kernel.nix
     ];
 
-  boot.kernelParams = [ "mitigations=off" ];
-
   nixpkgs.config.allowUnfree = true;
 
   networking.networkmanager.enable = true;
