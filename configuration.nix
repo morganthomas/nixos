@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./hostname.nix
-      ./kernel.nix
+      # ./kernel.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -33,9 +33,15 @@
     wget chromium git tmate wdiff psmisc zip nix-prefetch-git vim
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
     gnupg dos2unix nix-serve usbutils xmobar bpytop fd tilix dmenu networkmanager
-    mkpasswd zip unzip openfortivpn i7z nginx iftop ardour ffmpeg
-    youtube-dl vlc awscli ghc patchelf stack vscode pavucontrol
+    mkpasswd zip unzip openfortivpn i7z nginx iftop ardour ffmpeg jq
+    youtube-dl vlc awscli ghc patchelf stack vscode pavucontrol htop
+    haskell.compiler.ghc865 gimp nodejs signal-desktop haskellPackages.haskell-language-server
+    wavemon cdparanoia cdrdao bind google-chrome phantomjs2 libreoffice adoptopenjdk-bin
   ];
+
+  services.ntp.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "morgan" ];
 
   hardware.pulseaudio = {
     enable = true;
@@ -78,6 +84,7 @@
   services.xserver.enable = true;
   services.xserver.layout = "us,us";
   services.xserver.xkbVariant = ",dvorak";
+  services.xserver.wacom.enable = true;
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
