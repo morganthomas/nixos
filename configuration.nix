@@ -36,7 +36,7 @@
     mkpasswd zip unzip i7z jq htop discord xscreensaver
   ];
 
-  services.ntp.enable = true;
+  #services.ntp.enable = true;
   programs.dconf.enable = true;
   users.extraGroups.vboxusers.members = [ "morgan" ];
 
