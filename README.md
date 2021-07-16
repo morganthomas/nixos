@@ -31,8 +31,16 @@ n
 w
 sudo mkfs.ext4 $mediumPartition
 ```
-* Mount the installation target medium on `/mnt`.
-* For UEFI, `sudo mkdir /mnt/boot` and mount the boot partition on `/mnt/boot`.
+* To set up encryption on the main partition and map the decrypted partition to a device:
+```bash
+sudo cryptsetup -y -v luksFormat $mediumPartition1
+[answer yes to prompt]
+[set password]
+sudo cryptsetup -y -v luksOpen $mediumPartition1 foo
+[enter password]
+```
+* Mount the installation target medium on `/mnt`: `mount /dev/mapper/foo /mnt`
+* For UEFI, `sudo mkdir /mnt/boot` and mount the boot partition `$mediumPartition2` on `/mnt/boot`.
 * Generate configuration, install, and reboot: 
 ```bash
 sudo nixos-generate-config --root /mnt
@@ -90,16 +98,21 @@ Set the number of build cores in hardware-configuration.nix to equal the number 
  After booting and logging in as Morgan, take the following steps:
  
  ```bash
- mkdir -p media/SECURE_KEY
- sudo mount media/SECURE_KEY
- mkdir .ssh
- ln -s ~/media/SECURE_KEY/platonic ~/.ssh/platonic
- ln -s ~/media/SECURE_KEY/platonic.pub ~/.ssh/platonic.pub
- ssh-add ~/.ssh/platonic
  git clone git@github.com:morganthomas/dotfiles.git
  ```
  
- Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder.
+ Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder. Then reboot. Then open up a terminal and open the hamburger menu and go to Preferences > Profiles > Default, and check "Custom font."
+
+Then:
+
+```bash
+sudo mkdir /root/.ssh
+sudo rsync --archive --chown=root:root /home/morgan/.ssh /root/.ssh
+sudo rsync --archive --chown=root:root /home/morgan/.gitconfig /root/.gitconfig
+cd /etc/nixos
+sudo git remote remove origin
+sudo git remote add origin git@github.com:morganthomas/nixos.git
+```
 
  It's possible to use an Apricorn key as NixOS installation medium using a command like this to write the image:
  
