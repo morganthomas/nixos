@@ -95,10 +95,10 @@ Set the number of build cores in hardware-configuration.nix to equal the number 
  sudo shutdown now
  ```
  
- After booting and logging in as Morgan, take the following steps:
+ After booting and logging in as Morgan:
  
  ```bash
- git clone git@github.com:morganthomas/dotfiles.git
+ git clone https://github.com/morganthomas/dotfiles.git
  ```
  
  Then move everything (including the dotted files and directories) from the dotfiles folder into your home folder and remove the dotfiles folder. Then reboot. Then open up a terminal and open the hamburger menu and go to Preferences > Profiles > Default, and check "Custom font."
@@ -112,6 +112,20 @@ sudo rsync --archive --chown=root:root /home/morgan/.gitconfig /root/.gitconfig
 cd /etc/nixos
 sudo git remote remove origin
 sudo git remote add origin git@github.com:morganthomas/nixos.git
+```
+
+Create a new SSH key:
+
+```bash
+ssh-keygen -t ed25519
+```
+
+Add the SSH key to GitHub and:
+
+```bash
+cd
+git remote remove origin
+git remote add origin git@github.com:morganthomas/dotfiles.git
 ```
 
  It's possible to use an Apricorn key as NixOS installation medium using a command like this to write the image:
