@@ -37,7 +37,7 @@
     youtube-dl vlc awscli ghc patchelf stack vscode pavucontrol htop
     haskell.compiler.ghc865 gimp nodejs signal-desktop haskellPackages.haskell-language-server
     wavemon cdparanoia cdrdao bind google-chrome phantomjs2 libreoffice adoptopenjdk-bin
-    discord
+    cdrkit dvdplusrwtools
   ];
 
   services.ntp.enable = true;
