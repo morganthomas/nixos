@@ -33,7 +33,7 @@
     wget chromium git tmate wdiff psmisc zip nix-prefetch-git vim
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
     gnupg dos2unix xmobar fd tilix dmenu networkmanager
-    mkpasswd zip unzip i7z jq htop discord
+    mkpasswd zip unzip i7z jq htop discord xscreensaver
   ];
 
   services.ntp.enable = true;
