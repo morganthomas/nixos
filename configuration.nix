@@ -31,12 +31,13 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget chromium git tmate wdiff psmisc zip nix-prefetch-git vim
-    gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
+    gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot inkscape nodePackages.node2nix
     gnupg dos2unix nix-serve usbutils xmobar bpytop fd tilix dmenu networkmanager
     mkpasswd zip unzip openfortivpn i7z nginx iftop ardour ffmpeg jq
     youtube-dl vlc awscli ghc patchelf stack vscode pavucontrol htop
     haskell.compiler.ghc865 gimp nodejs signal-desktop haskellPackages.haskell-language-server
     wavemon cdparanoia cdrdao bind google-chrome phantomjs2 libreoffice adoptopenjdk-bin
+    discord
   ];
 
   services.ntp.enable = true;
@@ -82,14 +83,12 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.layout = "us,us";
-  services.xserver.xkbVariant = ",dvorak";
   services.xserver.wacom.enable = true;
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
   };
-  services.xserver.xkbOptions = "ctrl:swapcaps,grp:ctrl_shift_toggle";
+  services.xserver.xkbOptions = "ctrl:swapcaps";
   services.xserver.videoDrivers = [ "intel" ];
   # services.xserver.xkbOptions = "eurosign:e";
 
@@ -159,8 +158,8 @@
 
   networking.timeServers = options.networking.timeServers.default;
   
-  nix.binaryCaches = [ "https://nixcache.reflex-frp.org" "https://cache.nixos.org" "https://shpadoinkle.cachix.org" ];
-  nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8=" ];
+  nix.binaryCaches = [ "https://nixcache.reflex-frp.org" "https://cache.nixos.org" "https://shpadoinkle.cachix.org https://hydra.iohk.io" ];
+  nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8= iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo= hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
 
   services.postgresql = {
     enable = true;
