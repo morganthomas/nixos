@@ -111,18 +111,13 @@ Set the number of build cores in hardware-configuration.nix to equal the number 
 Then:
 
 ```bash
+ssh-keygen -t ed25519
 sudo mkdir /root/.ssh
 sudo rsync --archive --chown=root:root /home/morgan/.ssh /root/.ssh
 sudo rsync --archive --chown=root:root /home/morgan/.gitconfig /root/.gitconfig
 cd /etc/nixos
 sudo git remote remove origin
 sudo git remote add origin git@github.com:morganthomas/nixos.git
-```
-
-Create a new SSH key:
-
-```bash
-ssh-keygen -t ed25519
 ```
 
 Add the SSH key to GitHub and:
