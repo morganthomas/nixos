@@ -34,6 +34,7 @@
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
     gnupg dos2unix xmobar fd tilix dmenu networkmanager
     mkpasswd zip unzip i7z jq htop discord xscreensaver
+    inkscape
   ];
 
   #services.ntp.enable = true;
@@ -100,4 +101,17 @@
   
   nix.binaryCaches = [ "https://nixcache.reflex-frp.org" "https://cache.nixos.org" "https://shpadoinkle.cachix.org https://hydra.iohk.io" ];
   nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8= iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo= hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_13;
+    authentication = pkgs.lib.mkForce ''
+    local all all trust
+    host  all all 127.0.0.1/32 trust
+    host  all all ::1/128      trust
+    host  all all 0.0.0.0/0    trust
+    '';
+  };
+
+  virtualisation.docker.enable = true;
 }
