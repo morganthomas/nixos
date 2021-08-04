@@ -18,7 +18,6 @@ sudo parted $medium -- mklabel gpt
 sudo parted $medium -- mkpart primary 512MiB 100%
 sudo parted $medium -- mkpart ESP fat32 1MiB 512MiB
 sudo parted $medium -- set 2 boot on
-sudo mkfs.ext4 $mediumPartition1
 sudo mkfs.fat -F 32 -n boot $mediumPartition2
 ```
    * For BIOS:
@@ -38,9 +37,15 @@ sudo cryptsetup -y -v luksFormat $mediumPartition1
 [set password]
 sudo cryptsetup -y -v luksOpen $mediumPartition1 foo
 [enter password]
+sudo mkfs.ext4 /dev/mapper/foo
 ```
 * Mount the installation target medium on `/mnt`: `mount /dev/mapper/foo /mnt`
 * For UEFI, `sudo mkdir /mnt/boot` and mount the boot partition `$mediumPartition2` on `/mnt/boot`.
+* Connect to wifi if needed. Use `ifconfig` to find the interface:
+```bash
+wpa_passphrase 'SSID' 'password' >bar
+sudo wpa_supplicant -B -i $interface -cbar
+```
 * Generate configuration, install, and reboot: 
 ```bash
 sudo nixos-generate-config --root /mnt
@@ -106,18 +111,13 @@ Set the number of build cores in hardware-configuration.nix to equal the number 
 Then:
 
 ```bash
+ssh-keygen -t ed25519
 sudo mkdir /root/.ssh
 sudo rsync --archive --chown=root:root /home/morgan/.ssh /root/.ssh
 sudo rsync --archive --chown=root:root /home/morgan/.gitconfig /root/.gitconfig
 cd /etc/nixos
 sudo git remote remove origin
 sudo git remote add origin git@github.com:morganthomas/nixos.git
-```
-
-Create a new SSH key:
-
-```bash
-ssh-keygen -t ed25519
 ```
 
 Add the SSH key to GitHub and:
