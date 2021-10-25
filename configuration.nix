@@ -34,7 +34,7 @@
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
     gnupg dos2unix xmobar fd tilix dmenu networkmanager
     mkpasswd zip unzip i7z jq htop discord xscreensaver
-    inkscape nodejs-12_x
+    inkscape nodejs-12_x python39
   ];
 
   #services.ntp.enable = true;
@@ -78,6 +78,7 @@
   # services.xserver.libinput.enable = true;
 
   services.locate.enable = true;
+  services.tailscale.enable = true;
 
   # Enable the KDE Desktop Environment.
   # services.xserver.displayManager.sddm.enable = true;
