@@ -72,7 +72,6 @@
     enableContribAndExtras = true;
   };
   services.xserver.xkbOptions = "ctrl:swapcaps";
-  services.xserver.videoDrivers = [ "intel" ];
   # services.xserver.xkbOptions = "eurosign:e";
   # Enable touchpad support.
   # services.xserver.libinput.enable = true;
@@ -131,7 +130,7 @@
       "https://nixcache.reflex-frp.org"
       "https://shpadoinkle.cachix.org"
       "https://hydra.iohk.io" 
-      "ssh://nix-ssh@ci.ardana.platonic.systems"
+      "ssh://nix-ssh@ci.ardana.platonic.systems?ssh-key=/home/morgan/.ssh/id_ed25519"
     ];
   };
 }
