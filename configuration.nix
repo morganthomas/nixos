@@ -34,7 +34,7 @@
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
     gnupg dos2unix xmobar fd tilix dmenu networkmanager
     mkpasswd zip unzip i7z jq htop discord xscreensaver
-    inkscape nodejs-12_x python39
+    inkscape nodejs-12_x python39 vlc
   ];
 
   #services.ntp.enable = true;
