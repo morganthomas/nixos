@@ -41,6 +41,11 @@
   programs.dconf.enable = true;
   users.extraGroups.vboxusers.members = [ "morgan" ];
 
+  networking.extraHosts =
+    ''
+      193.16.42.17 morgan-compute
+    '';
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.bash.enableCompletion = true;
@@ -72,7 +77,6 @@
     enableContribAndExtras = true;
   };
   services.xserver.xkbOptions = "ctrl:swapcaps";
-  services.xserver.videoDrivers = [ "intel" ];
   # services.xserver.xkbOptions = "eurosign:e";
   # Enable touchpad support.
   # services.xserver.libinput.enable = true;
@@ -131,7 +135,7 @@
       "https://nixcache.reflex-frp.org"
       "https://shpadoinkle.cachix.org"
       "https://hydra.iohk.io" 
-      "ssh://nix-ssh@ci.ardana.platonic.systems"
+      "ssh://nix-ssh@ci.ardana.platonic.systems?ssh-key=/home/morgan/.ssh/id_ed25519"
     ];
   };
 }
