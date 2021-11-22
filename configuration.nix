@@ -41,6 +41,11 @@
   programs.dconf.enable = true;
   users.extraGroups.vboxusers.members = [ "morgan" ];
 
+  networking.extraHosts =
+    ''
+      193.16.42.17 morgan-compute
+    '';
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.bash.enableCompletion = true;
