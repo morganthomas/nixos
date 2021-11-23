@@ -44,6 +44,7 @@
   networking.extraHosts =
     ''
       193.16.42.17 morgan-compute
+      139.59.185.31 dana-circulating-supply
     '';
 
   # Some programs need SUID wrappers, can be configured further or are
