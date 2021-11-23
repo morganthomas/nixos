@@ -39,7 +39,6 @@
   #services.ntp.enable = true;
   programs.dconf.enable = true;
   users.extraGroups.vboxusers.members = [ "morgan" ];
-  boot.kernelPackages = pkgs.linuxPackages_5_14;
 
   networking.extraHosts =
     ''
