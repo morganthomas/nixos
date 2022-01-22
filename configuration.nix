@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./hostname.nix
-      # ./kernel.nix
+      ./kernel.nix
     ];
 
   nixpkgs.config.allowUnfree = true;
@@ -34,7 +34,7 @@
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
     gnupg dos2unix xmobar fd tilix dmenu networkmanager
     mkpasswd zip unzip i7z jq htop discord xscreensaver
-    inkscape nodejs-12_x python39
+    inkscape nodejs-12_x python39 doctl kubectl lsof stack
   ];
 
   #services.ntp.enable = true;
@@ -67,8 +67,8 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  # sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
