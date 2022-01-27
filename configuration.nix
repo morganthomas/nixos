@@ -139,4 +139,9 @@
       "ssh://nix-ssh@ci.ardana.platonic.systems?ssh-key=/home/morgan/.ssh/id_ed25519"
     ];
   };
+
+  security.acme = {
+    acceptTerms = true;
+    email = "morgan.thomas@platonic.systems";
+  };
 }
