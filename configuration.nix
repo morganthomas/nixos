@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
       ./bootloader.nix
       ./hostname.nix
+      ./kernel.nix
     ];
 
   nix.trustedUsers = [ "root" "morgan" ];
@@ -36,6 +37,7 @@
     gnupg dos2unix xmobar fd tilix dmenu networkmanager
     mkpasswd zip unzip i7z jq htop discord xscreensaver
     inkscape nodejs-12_x python39 vlc file rustup
+    doctl kubectl lsof stack
   ];
 
   #services.ntp.enable = true;
@@ -69,8 +71,8 @@
   # services.printing.enable = true;
 
   # Enable sound.
-  sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  # sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -137,5 +139,10 @@
       "https://shpadoinkle.cachix.org"
       "https://hydra.iohk.io" 
     ];
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    email = "morgan.thomas@platonic.systems";
   };
 }
