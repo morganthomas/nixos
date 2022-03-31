@@ -137,3 +137,10 @@ git remote add origin git@github.com:morganthomas/dotfiles.git
  In order for a computer to boot from the Apricorn key, the key must be placed in lock override mode so that it will not lock up during the boot process.
 
 Note that when updating xmobarrc, you may need to `killall xmobar` before mod+q to see the changes to xmobar.
+
+Finally, set to the unstable channel to get the latest updates:
+
+```bash
+sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
+sudo nix-channel --update
+```
