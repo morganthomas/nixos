@@ -37,7 +37,7 @@
     gnupg dos2unix xmobar fd tilix dmenu networkmanager
     mkpasswd zip unzip i7z jq htop discord xscreensaver
     inkscape nodejs-12_x python39 vlc file rustup
-    doctl kubectl lsof stack
+    doctl kubectl lsof stack vscodium
   ];
 
   #services.ntp.enable = true;
