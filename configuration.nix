@@ -36,8 +36,8 @@
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
     gnupg dos2unix xmobar fd tilix dmenu networkmanager
     mkpasswd zip unzip i7z jq htop discord xscreensaver
-    inkscape nodejs-12_x python39 vlc file rustup
-    doctl kubectl lsof stack vscodium
+    inkscape python39 vlc file rustup
+    doctl kubectl lsof stack vscodium cloc
   ];
 
   #services.ntp.enable = true;
@@ -46,8 +46,6 @@
 
   networking.extraHosts =
     ''
-      193.16.42.17 morgan-compute
-      139.59.185.31 dana-circulating-supply
     '';
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -103,7 +101,7 @@
   # should.
   system.stateVersion = "20.09"; # Did you read the comment?
   system.autoUpgrade.enable = true;
- 
+
   swapDevices = [{ device = "/swapfile"; }];
 
   networking.timeServers = options.networking.timeServers.default;
@@ -128,18 +126,18 @@
     '';
     binaryCachePublicKeys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
-      "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8="
-      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+      # "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
+      # "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8="
+      # "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
       "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk="
+      # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk="
     ];
     binaryCaches = [
       "https://cache.nixos.org"
-      "https://nixcache.reflex-frp.org"
-      "https://shpadoinkle.cachix.org"
+      # "https://nixcache.reflex-frp.org"
+      # "https://shpadoinkle.cachix.org"
       "https://hydra.iohk.io" 
-      "https://lean4.cachix.org/"
+      # "https://lean4.cachix.org/"
     ];
   };
 
