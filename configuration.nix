@@ -38,6 +38,7 @@
     mkpasswd zip unzip i7z jq htop discord xscreensaver
     inkscape python39 vlc file rustup
     doctl kubectl lsof stack vscodium cloc
+    parted graphviz tdesktop ardour audacity firefox cmake
   ];
 
   #services.ntp.enable = true;
