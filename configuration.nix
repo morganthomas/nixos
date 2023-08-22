@@ -36,9 +36,11 @@
     gnumake gcc binutils-unwrapped ncurses5 zlib.dev scrot
     gnupg dos2unix xmobar fd tilix dmenu networkmanager
     mkpasswd zip unzip i7z jq htop discord xscreensaver
-    inkscape python39 vlc file rustup
     doctl kubectl lsof stack vscodium cloc
     parted graphviz tdesktop ardour audacity firefox cmake
+    inkscape vlc file rustup
+    cloc skopeo electrum electron-cash
+    doctl kubectl lsof stack vscodium
   ];
 
   #services.ntp.enable = true;
@@ -125,25 +127,15 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-    binaryCachePublicKeys = [
+    settings.trusted-users = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      # "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
-      # "shpadoinkle.cachix.org-1:aRltE7Yto3ArhZyVjsyqWh1hmcCf27pYSmO1dPaadZ8="
-      # "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-      "iohk.cachix.org-1:DpRUyj7h7V830dp/i6Nti+NEO2/nhblbov/8MW7Rqoo="
-      # "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= lean4.cachix.org-1:mawtxSxcaiWE24xCXXgh3qnvlTkyU7evRRnGeAhD4Wk="
     ];
-    binaryCaches = [
+    settings.substituters = [
       "https://cache.nixos.org"
-      # "https://nixcache.reflex-frp.org"
-      # "https://shpadoinkle.cachix.org"
-      "https://hydra.iohk.io" 
-      # "https://lean4.cachix.org/"
     ];
+
   };
 
-  security.acme = {
-    acceptTerms = true;
-    email = "morgan.thomas@platonic.systems";
-  };
+  # Enable Intel microcode updates
+  hardware.cpu.intel.updateMicrocode = true;
 }
