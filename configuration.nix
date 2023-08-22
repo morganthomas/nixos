@@ -38,7 +38,7 @@
     mkpasswd zip unzip i7z jq htop discord xscreensaver
     doctl kubectl lsof stack vscodium cloc
     parted graphviz tdesktop ardour audacity firefox cmake
-    inkscape vlc file rustup
+    inkscape python3 vlc file rustup
     cloc skopeo electrum electron-cash
     doctl kubectl lsof stack vscodium
   ];
